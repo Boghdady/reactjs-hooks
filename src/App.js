@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 function App() {
@@ -13,9 +13,16 @@ function App() {
   // the useState() will render only once not render everytime 
   // when state is changes. that is good for performance wise.
   const [count, setCount] = useState(() => 0);
+  
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  })
+  
   function increment() {
     setCount(prevCount => prevCount+1);
   }
+  
   function decrement() {
     setCount(prevCount => prevCount-1);
   }
@@ -32,6 +39,7 @@ function App() {
   return (
     <div className="App">
      <header className="App-header">
+       <input ref={inputRef}/>
         <button onClick={increment}>+</button>
         <span>{count}</span>
         <button onClick={decrement}>-</button>
